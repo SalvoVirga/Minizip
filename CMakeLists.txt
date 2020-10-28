@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 3.6)
 
-project(Minizip VERSION 1.1)
+project(minizip VERSION 1.1)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
@@ -37,7 +37,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 	$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d" EXPORT_NAME Minizip)
+set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d" EXPORT_NAME minizip)
 
 include(GNUInstallDirs)
 
@@ -62,7 +62,7 @@ include(CMakePackageConfigHelpers)
 ######## 1. Build tree
 
 export(TARGETS ${PROJECT_NAME}
-	NAMESPACE Minizip::
+	NAMESPACE minizip::
 	FILE "${CMAKE_BINARY_DIR}/lib/cmake/${PROJECT_NAME}/${PROJECT_NAME}Targets.cmake"
 )
 
@@ -87,7 +87,6 @@ write_basic_package_version_file(
 
 install(TARGETS ${PROJECT_NAME}
 	EXPORT ${PROJECT_NAME}Targets
-	CONFIGURATIONS Debug Release	
 	RUNTIME
 		DESTINATION ${CMAKE_INSTALL_BINDIR}
 		COMPONENT ${PROJECT_NAME}_applications
@@ -100,10 +99,9 @@ install(TARGETS ${PROJECT_NAME}
 )
 
 install(EXPORT ${PROJECT_NAME}Targets
-		CONFIGURATIONS Debug Release
-		NAMESPACE Minizip::
-		DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
-		COMPONENT ${PROJECT_NAME}_libraries
+	NAMESPACE minizip::
+	DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+	COMPONENT ${PROJECT_NAME}_libraries
 )
 
 configure_package_config_file(
@@ -115,7 +113,6 @@ configure_package_config_file(
 )
 
 install(FILES "${CMAKE_BINARY_DIR}/cmake/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake"
-	CONFIGURATIONS Debug Release
 	DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
 	COMPONENT ${PROJECT_NAME}_libraries
 )
@@ -127,7 +124,6 @@ write_basic_package_version_file(
 )
 
 install(FILES "${CMAKE_BINARY_DIR}/cmake/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake"
-	CONFIGURATIONS Debug Release
 	DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
 	COMPONENT ${PROJECT_NAME}_libraries
 )
